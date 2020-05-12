@@ -1,8 +1,8 @@
-import {Controller, Get, Query} from '@nestjs/common';
-import {StatusService} from './status.service';
-import {GetStatus} from './dto/get-status.dto';
-import {MyLogger} from '../logger/my-logger.service';
-import {ConfigService} from '@nestjs/config';
+import { Controller, Get, Query, Body, Post } from '@nestjs/common';
+import { StatusService } from './status.service';
+import { GetStatus, SetStatusDto } from './dto/get-status.dto';
+import { MyLogger } from '../logger/my-logger.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('status')
 export class StatusController {
@@ -11,7 +11,7 @@ export class StatusController {
       private readonly logger: MyLogger,
       private readonly configService: ConfigService,
   ) {
-    this.logger.setContext('StatusController');
+    this.logger.setContext(StatusController.name);
   }
 
   @Get()
@@ -25,6 +25,13 @@ export class StatusController {
       res.s1 = s1;
     }
     return res;
+  }
+
+  @Post()
+  setStatus(@Body() data: SetStatusDto): string {
+    this.logger.log('setStatus');
+    this.logger.log(data);
+    return 'success';
   }
 
   @Get('crawler')

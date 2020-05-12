@@ -1,9 +1,9 @@
-import {Module} from '@nestjs/common';
-import {ConfigModule} from '@nestjs/config';
-import {ScheduleModule} from '@nestjs/schedule';
-import {StatusModule} from './status/status.module';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
+import { StatusModule } from './status/status.module';
 import configuration from './config/configuration';
-import {TasksService} from './tasks/tasks.service';
+import { TasksService } from './tasks/tasks.service';
 
 @Module({
   imports: [

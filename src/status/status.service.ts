@@ -1,6 +1,6 @@
-import {Injectable, HttpService} from '@nestjs/common';
-import {MyLogger} from '../logger/my-logger.service';
-import {AxiosRequestConfig} from 'axios';
+import { Injectable, HttpService } from '@nestjs/common';
+import { MyLogger } from '../logger/my-logger.service';
+import { AxiosRequestConfig } from 'axios';
 
 @Injectable()
 export class StatusService {
@@ -8,7 +8,7 @@ export class StatusService {
     private readonly logger: MyLogger,
     private readonly httpService: HttpService
   ) {
-    this.logger.setContext('StatusService');
+    this.logger.setContext(StatusService.name);
   }
 
   getStatus(): string {
@@ -35,10 +35,10 @@ export class StatusService {
     return new Promise((resolve, reject) => {
       const observable = this.httpService.get(url, config);
       observable.subscribe({
-        next: (res)=>{
+        next: (res) => {
           resolve(res.data);
         },
-        error: (err)=>{
+        error: (err) => {
           reject(err.message + ',' + url);
         },
       });

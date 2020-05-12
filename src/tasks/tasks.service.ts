@@ -1,8 +1,8 @@
-import {Injectable, HttpService} from '@nestjs/common';
-import {Cron} from '@nestjs/schedule';
-import {ConfigService} from '@nestjs/config';
-import {StatusService} from '../status/status.service';
-import {MyLogger} from '../logger/my-logger.service';
+import { Injectable, HttpService } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
+import { ConfigService } from '@nestjs/config';
+import { StatusService } from '../status/status.service';
+import { MyLogger } from '../logger/my-logger.service';
 
 @Injectable()
 export class TasksService {
@@ -10,7 +10,7 @@ export class TasksService {
   private readonly statusService = new StatusService(this.logger, new HttpService());
   private readonly configService = new ConfigService();
 
-  @Cron('*/10 * * * * *', {
+  @Cron('0 */10 * * * *', {
     name: 'cron_10',
   })
   handleCron() {
