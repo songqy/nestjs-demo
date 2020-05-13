@@ -32,14 +32,16 @@ export class StatusController {
   }
 
   @Post()
-  setStatus(@Body() data: SetStatusDto): string {
+  setStatus(@Body() data: SetStatusDto): any {
     this.logger.log('setStatus');
     this.logger.log(data);
-    return 'success';
+    return {
+      success: true,
+    };
   }
 
   @Get('crawler')
-  async crawler(): Promise<string> {
+  async crawler(): Promise<any> {
     this.statusService.httpGet(this.configService.get('baseUrl1'));
     this.statusService.httpGet(this.configService.get('baseUrl2'));
 
@@ -47,7 +49,9 @@ export class StatusController {
     const flag = await this.fileService.existsFile(url);
     this.logger.log('url:' + url + ',flag:' + flag);
 
-    return 'success';
+    return {
+      success: true,
+    };
   }
 
 }

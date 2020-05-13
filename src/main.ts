@@ -3,6 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { MyLogger } from './logger/my-logger.service';
 import { ConfigService } from '@nestjs/config';
+import { LoggingInterceptor } from './interceptor/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -16,6 +17,8 @@ async function bootstrap() {
 
   // 参数校验
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
+  app.useGlobalInterceptors(new LoggingInterceptor(logger));
 
   // 获取配置
   const configService: ConfigService = app.get(ConfigService);
