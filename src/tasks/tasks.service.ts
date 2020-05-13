@@ -1,22 +1,25 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { ConfigService } from '@nestjs/config';
 import { StatusService } from '../status/status.service';
 import { MyLogger } from '../logger/my-logger.service';
-import { HttpRequest } from '../http/http-request.service';
 
 @Injectable()
 export class TasksService {
-  private readonly logger = new MyLogger(TasksService.name);
-  private readonly statusService = new StatusService(this.logger, new HttpRequest(this.logger, new HttpService()));
-  private readonly configService = new ConfigService();
+  constructor(
+    private readonly logger: MyLogger,
+    private readonly configService: ConfigService,
+    private readonly statusService: StatusService,
+  ) {
+    this.logger.setContext(TasksService.name);
+  }
 
-  @Cron('0 */10 * * * *', {
+  @Cron('*/10 * * * * *', {
     name: 'cron_10',
   })
   handleCron() {
-    this.logger.log('handleCron');
     const url = this.configService.get('baseUrl1');
+    this.logger.log('handleCron,url:' + url);
     this.statusService.httpGet(url);
   }
 }

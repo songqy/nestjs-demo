@@ -14,6 +14,7 @@ async function bootstrap() {
   // 使用自定义的日志
   app.useLogger(logger);
 
+  // 参数校验
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   // 获取配置

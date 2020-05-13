@@ -1,7 +1,8 @@
 import { Controller, Get, Query, Body, Post } from '@nestjs/common';
 import * as path from 'path';
 import { StatusService } from './status.service';
-import { GetStatus, SetStatusDto } from './dto/get-status.dto';
+import { SetStatusDto } from './status.dto';
+import { GetStatus } from './status.interface';
 import { MyLogger } from '../logger/my-logger.service';
 import { ConfigService } from '@nestjs/config';
 import { FileService } from '../file/file.service';

@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { StatusModule } from './status/status.module';
 import configuration from './config/configuration';
-import { TasksService } from './tasks/tasks.service';
+import { TasksModule } from './tasks/tasks.module';
 import { LoggerModule } from './logger/logger.module';
 import { HttpRequestModule } from './http/http-request.module';
 import { FileModule } from './file/file.module';
@@ -17,7 +17,7 @@ import { FileModule } from './file/file.module';
       isGlobal: true,
     }),
     ScheduleModule.forRoot(),
-    TasksService,
+    TasksModule,
     LoggerModule,
     HttpRequestModule,
     FileModule,
