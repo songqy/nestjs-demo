@@ -1,8 +1,10 @@
 import { Controller, Get, Query, Body, Post } from '@nestjs/common';
+import * as path from 'path';
 import { StatusService } from './status.service';
 import { GetStatus, SetStatusDto } from './dto/get-status.dto';
 import { MyLogger } from '../logger/my-logger.service';
 import { ConfigService } from '@nestjs/config';
+import { FileService } from '../file/file.service';
 
 @Controller('status')
 export class StatusController {
@@ -10,6 +12,7 @@ export class StatusController {
       private readonly statusService: StatusService,
       private readonly logger: MyLogger,
       private readonly configService: ConfigService,
+      private readonly fileService: FileService,
   ) {
     this.logger.setContext(StatusController.name);
   }
@@ -38,6 +41,10 @@ export class StatusController {
   async crawler(): Promise<string> {
     this.statusService.httpGet(this.configService.get('baseUrl1'));
     this.statusService.httpGet(this.configService.get('baseUrl2'));
+
+    const url: string = path.join(__dirname, '../../tsconfig.json');
+    const flag = await this.fileService.existsFile(url);
+    this.logger.log('url:' + url + ',flag:' + flag);
 
     return 'success';
   }

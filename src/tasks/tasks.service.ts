@@ -3,11 +3,12 @@ import { Cron } from '@nestjs/schedule';
 import { ConfigService } from '@nestjs/config';
 import { StatusService } from '../status/status.service';
 import { MyLogger } from '../logger/my-logger.service';
+import { HttpRequest } from '../http/http-request.service';
 
 @Injectable()
 export class TasksService {
   private readonly logger = new MyLogger(TasksService.name);
-  private readonly statusService = new StatusService(this.logger, new HttpService());
+  private readonly statusService = new StatusService(this.logger, new HttpRequest(this.logger, new HttpService()));
   private readonly configService = new ConfigService();
 
   @Cron('0 */10 * * * *', {
