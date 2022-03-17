@@ -1,4 +1,5 @@
-import { Module, HttpModule, Global } from '@nestjs/common';
+import { Module, Global } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios'
 import { HttpRequest } from './http-request.service';
 
 @Global()

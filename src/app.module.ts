@@ -22,7 +22,7 @@ import { AllExceptionFilter } from './filter/all-exception.filter';
       isGlobal: true,
     }),
     ScheduleModule.forRoot(),
-    TasksModule,
+    // TasksModule,
     LoggerModule,
     HttpRequestModule,
     FileModule,
