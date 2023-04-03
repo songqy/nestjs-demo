@@ -1,5 +1,4 @@
-
 export interface GetStatus {
-    name: string;
-    s1?: number;
-};
+  name: string;
+  s1?: number;
+}

@@ -8,7 +8,7 @@ export class LoggerMiddleware implements NestMiddleware {
     this.logger.setContext(LoggerMiddleware.name);
   }
 
-  use(req: Request, res: Response, next: Function) {
+  use(req: Request, res: Response, next: () => void) {
     this.logger.log('LoggerMiddleware');
     next();
   }

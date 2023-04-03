@@ -10,10 +10,10 @@ import { FileService } from '../file/file.service';
 @Controller('status')
 export class StatusController {
   constructor(
-      private readonly statusService: StatusService,
-      private readonly logger: MyLogger,
-      private readonly configService: ConfigService,
-      private readonly fileService: FileService,
+    private readonly statusService: StatusService,
+    private readonly logger: MyLogger,
+    private readonly configService: ConfigService,
+    private readonly fileService: FileService,
   ) {
     this.logger.setContext(StatusController.name);
   }
@@ -53,5 +53,4 @@ export class StatusController {
       success: true,
     };
   }
-
 }

@@ -1,5 +1,5 @@
 import { Module, Global } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios'
+import { HttpModule } from '@nestjs/axios';
 import { HttpRequest } from './http-request.service';
 
 @Global()
@@ -8,5 +8,4 @@ import { HttpRequest } from './http-request.service';
   providers: [HttpRequest],
   exports: [HttpRequest],
 })
-
 export class HttpRequestModule {}

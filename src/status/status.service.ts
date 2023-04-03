@@ -6,7 +6,7 @@ import { HttpRequest } from '../http/http-request.service';
 export class StatusService {
   constructor(
     private readonly logger: MyLogger,
-    private readonly httpRequest: HttpRequest
+    private readonly httpRequest: HttpRequest,
   ) {
     this.logger.setContext(StatusService.name);
   }

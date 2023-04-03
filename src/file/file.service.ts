@@ -16,7 +16,11 @@ export class FileService {
     this.logger.setContext(FileService.name);
   }
 
-  async write(path: string | Buffer | URL, data: any, options?: WriteFileOptions): Promise<void> {
+  async write(
+    path: string | Buffer | URL,
+    data: any,
+    options?: WriteFileOptions,
+  ): Promise<void> {
     try {
       await writeFile(path, data, options);
       this.logger.log(path + ',The file has been saved!');
@@ -37,10 +41,13 @@ export class FileService {
     return flag;
   }
 
-  async mkdir(path: string | Buffer | URL, options?: WriteFileOptions): Promise<void> {
+  async mkdir(
+    path: string | Buffer | URL,
+    options?: WriteFileOptions,
+  ): Promise<void> {
     const flag = await this.existsFile(path);
     if (!flag) {
-      await mkdir(path, options).catch(e => this.logger.error(e));
+      await mkdir(path, options).catch((e) => this.logger.error(e));
     }
   }
 
@@ -53,5 +60,4 @@ export class FileService {
       return [];
     }
   }
-
 }

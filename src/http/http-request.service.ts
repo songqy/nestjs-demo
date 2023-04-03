@@ -7,7 +7,7 @@ import { AxiosRequestConfig } from 'axios';
 export class HttpRequest {
   constructor(
     private readonly logger: MyLogger,
-    private readonly httpService: HttpService
+    private readonly httpService: HttpService,
   ) {
     this.logger.setContext(HttpRequest.name);
   }
@@ -28,7 +28,10 @@ export class HttpRequest {
     return res;
   }
 
-  private async httpGetSingle(url: string, config?: AxiosRequestConfig): Promise<any> {
+  private async httpGetSingle(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
       const observable = this.httpService.get(url, config);
       observable.subscribe({

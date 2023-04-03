@@ -21,15 +21,15 @@ export class ErrorsInterceptor implements NestInterceptor {
     const req: Request = context.getArgByIndex(0);
     const ip = Utils.getIp(req.ip);
     const startTime = Date.now();
-    return next
-      .handle()
-      .pipe(
-        catchError((err: Error) => {
-          const time = (Date.now() - startTime) + 'ms';
-          this.logger.error(`[request error]: ${ip},${req.method},${req.originalUrl},${time}`);
-          this.logger.error(err.message, err.stack);
-          return throwError(new BadGatewayException(err));
-        }),
-      );
+    return next.handle().pipe(
+      catchError((err: Error) => {
+        const time = Date.now() - startTime + 'ms';
+        this.logger.error(
+          `[request error]: ${ip},${req.method},${req.originalUrl},${time}`,
+        );
+        this.logger.error(err.message, err.stack);
+        return throwError(() => new BadGatewayException(err));
+      }),
+    );
   }
 }
